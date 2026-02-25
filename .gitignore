@@ -1,0 +1,46 @@
+# =========================
+# 🔹 GLOBAL
+# =========================
+.env
+.env.*
+*.env
+*.log
+*.sqlite3
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.DS_Store
+
+# =========================
+# 🔹 NEXTJS (frontend)
+# =========================
+frontend/node_modules/
+frontend/.next/
+frontend/out/
+frontend/build/
+frontend/.env.local
+frontend/.env.development.local
+frontend/.env.production.local
+frontend/.env.test.local
+
+# =========================
+# 🔹 FASTAPI (backend)
+# =========================
+backend/__pycache__/
+backend/*.pyc
+backend/.env
+backend/venv/
+backend/.venv/
+backend/env/
+
+# =========================
+# 🔹 ALEMBIC
+# =========================
+alembic/__pycache__/
+
+# =========================
+# 🔹 IDE
+# =========================
+.vscode/
+.idea/
