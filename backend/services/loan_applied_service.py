@@ -17,16 +17,33 @@ def add_loan_applied_service(
 
     return create_loan_applied(db, user_id, details)
 
-# def delete_user_details_service(
-#     db: Session,
-#     user_id: int
-# ):    
-#     db.query(UserDetails).filter(
-#         UserDetails.user_id == user_id
-#     ).delete()
-#     db.commit()
+def delete_loan_applied_service(
+    db: Session,
+    user_id: int,
+    loan_id: int
+):  
+    loan = db.query(Loan).filter(
+        loan_id == Loan.id
+    ).first()
 
-#     return {"message": "User details deleted successfully"}
+    if not loan:
+        raise HTTPException(
+            status_code=404,
+            detail="Loan not found"
+        )
+    if loan.loan_status != "PENDING":
+        raise HTTPException(
+            status_code=400,
+            detail="Loan cannot be deleted"
+        )
+
+    db.query(Loan).filter(
+        Loan.user_id == user_id,
+        Loan.id == loan_id
+    ).delete()
+    db.commit()
+
+    return {"message": "Loan deleted successfully"}
 
 # from backend.schemas.user_details import UserDetailsUpdate
 # from backend.crud.user_details import update_user_details

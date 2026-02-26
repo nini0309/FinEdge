@@ -9,7 +9,7 @@ from backend.schemas.loan_applied import (
 )
 from backend.api.deps import get_current_user
 from backend.models.user import User
-from backend.services.loan_applied_service import add_loan_applied_service
+from backend.services.loan_applied_service import add_loan_applied_service, delete_loan_applied_service
 from backend.crud.loan_applied import get_loans_by_user, get_loan_by_id
 from backend.ml.loan_processor import process_loan_background
 
@@ -41,17 +41,19 @@ def apply_loan(
     
     return loan
 
-# @router.delete(
-#     ""
-# )
-# def delete_user_details(
-#     db: Session = Depends(get_db),
-#     current_user: User = Depends(get_current_user)
-# ):
-#     return delete_user_details_service(
-#         db=db,
-#         user_id=current_user.id
-# )
+@router.delete(
+    "/{loan_id}",
+)
+def delete_loan_applied(
+    loan_id: int,
+    db: Session = Depends(get_db),
+    current_user: User = Depends(get_current_user)
+):
+    return delete_loan_applied_service(
+        db=db,
+        user_id=current_user.id,
+        loan_id=loan_id
+)
 
 # from backend.schemas.user_details import UserDetailsUpdate
 # from backend.services.user_details_service import update_user_details_service

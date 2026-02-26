@@ -1,8 +1,8 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
 import { notFound } from "next/navigation";
 import { api } from "@/lib/api";
+import DeleteLoanButton from "@/components/delete-loan-button";
 
 type Loan = {
   id: number;
@@ -70,9 +70,7 @@ export default async function LoanDetailsPage({
           />
 
           <div className="pt-4">
-            <Button disabled={isDisabled}>
-              Delete Loan
-            </Button>
+            <DeleteLoanButton id={loan.id} disabled={isDisabled} />
           </div>
         </CardContent>
       </Card>
